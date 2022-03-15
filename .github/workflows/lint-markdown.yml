@@ -27,9 +27,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Install prettier
-        run: sudo npm install -g prettier
-      - name: Display prettier
-        run: prettier --version
-      - name: Run prettier
-        run: prettier --check --parser=markdown '**/*.md'
+      - name: Format check with Prettier
+        uses: tmknom/prettier-action@v0
+        with:
+          parser: "markdown"
