@@ -6,8 +6,9 @@ on:
       - ".github/workflows/internal-test.yml"
   pull_request:
     paths:
-      - ".github/workflows/**.yml"
-      - ".github/workflows/**.yaml"
+      - "**.yml"
+      - "**.yaml"
+      - "**.md"
 
 permissions:
   contents: read
