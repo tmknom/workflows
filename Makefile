@@ -80,6 +80,17 @@ format-markdown: ## format markdown by prettier
 format-yaml: ## format yaml by prettier
 	$(SECURE_DOCKER_RUN) prettier --write --parser=yaml **/*.y*ml
 
+#
+# Release management
+#
+release: ## release
+	version="v$$(cat VERSION)" && \
+	major_version=$$(echo "$${version%%.*}") && \
+	$(GIT) tag --force "$${version}" && \
+	$(GIT) tag --force "$${major_version}" && \
+	$(GIT) push --force origin "$${version}" && \
+	$(GIT) push --force origin "$${major_version}"
+
 bump: input-version commit create-pr ## bump version
 
 input-version:
