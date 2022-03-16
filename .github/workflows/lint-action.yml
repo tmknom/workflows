@@ -2,9 +2,6 @@ name: Lint Action
 on:
   workflow_call:
 
-permissions:
-  contents: read
-
 jobs:
   actionlint:
     name: Lint by actionlint

@@ -2,9 +2,6 @@ name: Lint YAML
 on:
   workflow_call:
 
-permissions:
-  contents: read
-
 jobs:
   yamllint:
     # use pre-installed yamllint

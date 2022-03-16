@@ -2,9 +2,6 @@ name: Lint Markdown
 on:
   workflow_call:
 
-permissions:
-  contents: read
-
 jobs:
   markdownlint:
     name: Lint by markdownlint
