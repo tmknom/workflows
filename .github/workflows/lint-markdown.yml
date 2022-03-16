@@ -2,8 +2,7 @@ name: Lint Markdown
 on:
   workflow_call:
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   markdownlint:
