@@ -40,6 +40,35 @@ jobs:
     uses: tmknom/workflows/.github/workflows/lint-action.yml@v0
 ```
 
+## Developer Guide
+
+### Requirements
+
+- [GNU Make](https://www.gnu.org/software/make/)
+- [GitHub CLI](https://cli.github.com/)
+
+### Prepare Release
+
+Bump up to a new version.
+
+```shell
+make bump
+```
+
+This command perform the following process:
+
+1. Update [VERSION](/VERSION)
+2. Commit and push
+3. Create a pull request and open the web browser
+
+### Release
+
+Publish a new release tag.
+
+```shell
+make release
+```
+
 ## License
 
 Apache 2 Licensed. See LICENSE for full details.
