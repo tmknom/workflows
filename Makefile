@@ -80,6 +80,24 @@ format-markdown: ## format markdown by prettier
 format-yaml: ## format yaml by prettier
 	$(SECURE_DOCKER_RUN) prettier --write --parser=yaml **/*.y*ml
 
+bump: input-version commit create-pr ## bump version
+
+input-version:
+	@echo "Current version: $$(cat VERSION)" && \
+	read -rp "Input next version: " version && \
+	echo "$${version}" > VERSION
+
+commit:
+	version="v$$(cat VERSION)" && \
+	$(GIT) switch -c "bump-$${version}" && \
+	$(GIT) add VERSION && \
+	$(GIT) commit -m "Bump up to $${version}"
+
+create-pr:
+	version="v$$(cat VERSION)" && \
+	$(GIT) push origin $$($(GIT) rev-parse --abbrev-ref HEAD) && \
+	$(GH) pr create --title "Bump up to $${version}" --body "" --web
+
 #
 # Help
 #
