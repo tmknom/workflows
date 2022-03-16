@@ -1,13 +1,6 @@
 name: Lint YAML
 on:
-  workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/lint-yaml.yml"
-  pull_request:
-    paths:
-      - "**.yml"
-      - "**.yaml"
+  workflow_call:
 
 permissions:
   contents: read
