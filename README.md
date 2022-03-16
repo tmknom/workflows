@@ -13,3 +13,7 @@ Available workflows:
 - Lint for GitHub Actions workflows
 
 See details: [GitHub documentation](https://docs.github.com/en/actions/using-workflows/reusing-workflows).
+
+## License
+
+Apache 2 Licensed. See LICENSE for full details.
