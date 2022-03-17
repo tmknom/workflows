@@ -10,8 +10,7 @@ on:
       - "**.yaml"
       - "**.md"
 
-permissions:
-  contents: read
+permissions: {}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
