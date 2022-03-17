@@ -1,6 +1,14 @@
 name: Lint Action
 on:
   workflow_call:
+    inputs:
+      actionlint-ignore-options:
+        default: ""
+        required: false
+        type: string
+        description: >
+          Regular expression matching to error messages you want to ignore for actionlint.
+          Specify on multiple lines, you can set repeatable ignore flags.
 
 jobs:
   actionlint:
@@ -15,4 +23,15 @@ jobs:
       - name: Display actionlint
         run: ./actionlint --version
       - name: Run actionlint
-        run: ./actionlint -color -ignore '"permissions" section should not be empty.'
+        env:
+          IGNORE_OPTIONS: ${{ inputs.actionlint-ignore-options }}
+        run: |
+          IFS=$'\n' read -ra ignore_option_array <<< "$(printenv IGNORE_OPTIONS)"
+
+          declare -a options=()
+          for ignore_option in "${ignore_option_array[@]}"; do
+            options+=("-ignore")
+            options+=("${ignore_option}")
+          done
+
+          ./actionlint "${options[@]}"

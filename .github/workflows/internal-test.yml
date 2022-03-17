@@ -25,3 +25,6 @@ jobs:
 
   lint-action:
     uses: ./.github/workflows/lint-action.yml
+    with:
+      actionlint-ignore-options: >
+        "permissions" section should not be empty.
