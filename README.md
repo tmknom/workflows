@@ -21,7 +21,7 @@ See details: [GitHub documentation](https://docs.github.com/en/actions/using-wor
 ```yaml
 jobs:
   lint-yaml:
-    uses: tmknom/workflows/.github/workflows/lint-yaml.yml@v0
+    uses: tmknom/workflows/.github/workflows/lint-yaml.yml@v1
 ```
 
 ### Lint Markdown
@@ -29,7 +29,7 @@ jobs:
 ```yaml
 jobs:
   lint-markdown:
-    uses: tmknom/workflows/.github/workflows/lint-markdown.yml@v0
+    uses: tmknom/workflows/.github/workflows/lint-markdown.yml@v1
 ```
 
 ### Lint Action
@@ -37,7 +37,7 @@ jobs:
 ```yaml
 jobs:
   lint-action:
-    uses: tmknom/workflows/.github/workflows/lint-action.yml@v0
+    uses: tmknom/workflows/.github/workflows/lint-action.yml@v1
 ```
 
 ## Developer Guide
