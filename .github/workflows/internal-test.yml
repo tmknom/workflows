@@ -23,6 +23,11 @@ jobs:
   lint-markdown:
     uses: ./.github/workflows/lint-markdown.yml
 
+  lint-markdown-with-config:
+    uses: ./.github/workflows/lint-markdown.yml
+    with:
+      markdownlint-config: ".markdownlint.yml"
+
   lint-action:
     uses: ./.github/workflows/lint-action.yml
     with:

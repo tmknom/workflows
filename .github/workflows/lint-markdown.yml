@@ -1,6 +1,12 @@
 name: Lint Markdown
 on:
   workflow_call:
+    inputs:
+      markdownlint-config:
+        default: ""
+        required: false
+        type: string
+        description: "Path to a configuration file."
 
 jobs:
   markdownlint:
@@ -15,7 +21,15 @@ jobs:
       - name: Display markdownlint
         run: markdownlint --version
       - name: Run markdownlint
-        run: markdownlint --dot --config .markdownlint.yml '**/*.md'
+        env:
+          MARKDOWNLINT_CONFIG: ${{ inputs.markdownlint-config }}
+        run: |
+          declare -a args=("--dot")
+          if [[ "${MARKDOWNLINT_CONFIG}" != "" ]]; then
+            args+=("--config")
+            args+=("${MARKDOWNLINT_CONFIG}")
+          fi
+          markdownlint "${args[@]}" '**/*.md'
 
   prettier:
     name: Format by prettier
