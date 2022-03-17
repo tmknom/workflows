@@ -80,6 +80,17 @@ make release
 
 Finally, we can use the new version! :tada:
 
+### Note
+
+#### Versioning policy
+
+Use the [Semantic Versioning](https://semver.org/).
+
+#### Naming conventions
+
+Files with `internal-` prefix such as [internal-test.yml](.github/workflows/internal-test.yml)
+are used only this repository. These aren't reusable workflows for using by the others.
+
 ## License
 
 Apache 2 Licensed. See LICENSE for full details.
