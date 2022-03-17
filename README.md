@@ -47,6 +47,10 @@ jobs:
 - [GNU Make](https://www.gnu.org/software/make/)
 - [GitHub CLI](https://cli.github.com/)
 
+### CI
+
+- Testing workflows: [internal-test.yml](.github/workflows/internal-test.yml)
+
 ### Release
 
 #### 1. Bump up to a new version
