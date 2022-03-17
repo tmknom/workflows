@@ -1,6 +1,12 @@
 name: Lint YAML
 on:
   workflow_call:
+    inputs:
+      yamllint-config:
+        default: ""
+        required: false
+        type: string
+        description: "Path to a configuration file."
 
 jobs:
   yamllint:
@@ -15,7 +21,15 @@ jobs:
       - name: Display yamllint
         run: yamllint --version
       - name: Run yamllint
-        run: yamllint --strict --config-file .yamllint.yml .
+        env:
+          CONFIG: ${{ inputs.yamllint-config }}
+        run: |
+          declare -a args=("--strict")
+          if [[ "${CONFIG}" != "" ]]; then
+            args+=("--config-file")
+            args+=("${CONFIG}")
+          fi
+          yamllint "${args[@]}" .
 
   prettier:
     name: Format by prettier
