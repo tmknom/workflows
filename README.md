@@ -47,27 +47,34 @@ jobs:
 - [GNU Make](https://www.gnu.org/software/make/)
 - [GitHub CLI](https://cli.github.com/)
 
-### Prepare Release
+### Release
 
-Bump up to a new version.
+#### 1. Bump up to a new version
+
+Run the following command to bump up.
 
 ```shell
 make bump
 ```
 
-This command perform the following process:
+This command will execute the following steps:
 
 1. Update [VERSION](/VERSION)
 2. Commit and push
-3. Create a pull request and open the web browser
+3. Create a pull request
+4. Open the web browser automatically for reviewing pull request
 
-### Release
+Then review and merge, so the release is ready to go.
 
-Publish a new release tag.
+#### 2. Publish the new version
+
+Run the following command to publish a new tag at GitHub.
 
 ```shell
 make release
 ```
+
+Finally, we can use the new version! :tada:
 
 ## License
 
