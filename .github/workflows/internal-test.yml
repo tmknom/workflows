@@ -20,6 +20,11 @@ jobs:
   lint-yaml:
     uses: ./.github/workflows/lint-yaml.yml
 
+  lint-yaml-with-config:
+    uses: ./.github/workflows/lint-yaml.yml
+    with:
+      yamllint-config: ".yamllint.yml"
+
   lint-markdown:
     uses: ./.github/workflows/lint-markdown.yml
 
