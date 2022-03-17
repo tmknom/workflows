@@ -22,12 +22,12 @@ jobs:
         run: markdownlint --version
       - name: Run markdownlint
         env:
-          MARKDOWNLINT_CONFIG: ${{ inputs.markdownlint-config }}
+          CONFIG: ${{ inputs.markdownlint-config }}
         run: |
           declare -a args=("--dot")
-          if [[ "${MARKDOWNLINT_CONFIG}" != "" ]]; then
+          if [[ "${CONFIG}" != "" ]]; then
             args+=("--config")
-            args+=("${MARKDOWNLINT_CONFIG}")
+            args+=("${CONFIG}")
           fi
           markdownlint "${args[@]}" '**/*.md'
 
