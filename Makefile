@@ -51,21 +51,33 @@ DOCKER_RUN ?= $(DOCKER) run $(DOCKER_RUN_OPTIONS)
 SECURE_DOCKER_RUN ?= $(DOCKER_RUN) $(DOCKER_RUN_SECURE_OPTIONS)
 
 #
+# Variables for the image name
+#
+REGISTRY ?= ghcr.io/tmknom/dockerfiles
+PRETTIER ?= $(REGISTRY)/prettier:latest
+MARKDOWNLINT ?= $(REGISTRY)/markdownlint:latest
+YAMLLINT ?= $(REGISTRY)/yamllint:latest
+ACTIONLINT ?= rhysd/actionlint:latest
+
+#
 # Lint
 #
 .PHONY: lint
-lint: lint-markdown lint-yaml ## lint all
+lint: lint-markdown lint-yaml lint-action ## lint all
 
 .PHONY: lint-markdown
 lint-markdown: ## lint markdown by markdownlint and prettier
-	$(SECURE_DOCKER_RUN) markdownlint --dot --config .markdownlint.yml **/*.md
-	$(SECURE_DOCKER_RUN) prettier --check --parser=markdown **/*.md
-
+	$(SECURE_DOCKER_RUN) $(MARKDOWNLINT) --dot --config .markdownlint.yml **/*.md
+	$(SECURE_DOCKER_RUN) $(PRETTIER) --check --parser=markdown **/*.md
 
 .PHONY: lint-yaml
 lint-yaml: ## lint yaml by yamllint and prettier
-	$(SECURE_DOCKER_RUN) yamllint --strict --config-file .yamllint.yml .
-	$(SECURE_DOCKER_RUN) prettier --check --parser=yaml **/*.y*ml
+	$(SECURE_DOCKER_RUN) $(YAMLLINT) --strict --config-file .yamllint.yml .
+	$(SECURE_DOCKER_RUN) $(PRETTIER) --check --parser=yaml **/*.y*ml
+
+.PHONY: lint-action
+lint-action: ## lint action by actionlint
+	$(SECURE_DOCKER_RUN) $(ACTIONLINT) -color -ignore '"permissions" section should not be empty.'
 
 #
 # Format code
@@ -75,11 +87,11 @@ format: format-markdown format-yaml ## format all
 
 .PHONY: format-markdown
 format-markdown: ## format markdown by prettier
-	$(SECURE_DOCKER_RUN) prettier --write --parser=markdown **/*.md
+	$(SECURE_DOCKER_RUN) $(PRETTIER) --write --parser=markdown **/*.md
 
 .PHONY: format-yaml
 format-yaml: ## format yaml by prettier
-	$(SECURE_DOCKER_RUN) prettier --write --parser=yaml **/*.y*ml
+	$(SECURE_DOCKER_RUN) $(PRETTIER) --write --parser=yaml **/*.y*ml
 
 #
 # Release management
