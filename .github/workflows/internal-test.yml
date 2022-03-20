@@ -17,40 +17,91 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  diff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      BASE_BRANCH: "main"
+    outputs:
+      files: ${{ steps.git-diff.outputs.files }}
+      yaml: ${{ steps.git-diff.outputs.yaml }}
+      markdown: ${{ steps.git-diff.outputs.markdown }}
+      shell: ${{ steps.git-diff.outputs.shell }}
+      action: ${{ steps.git-diff.outputs.action }}
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 100
+      - name: Git diff
+        id: git-diff
+        run: |
+          git fetch --no-tags --no-recurse-submodules --depth=1 origin "${BASE_BRANCH}"
+          files="$(git diff origin/"${BASE_BRANCH}" --name-only)"
+          echo "::set-output name=files::${files}"
+
+          yaml="$(echo "${files}" | grep -E ".y*ml$" || true)"
+          echo "::set-output name=yaml::${yaml}"
+
+          markdown="$(echo "${files}" | grep -E ".md$" || true)"
+          echo "::set-output name=markdown::${markdown}"
+
+          shell="$(echo "${files}" | grep -E ".sh$" || true)"
+          echo "::set-output name=shell::${shell}"
+
+          action="$(echo "${files}" | grep -E "^.github/workflows/.*.y*ml$" || true)"
+          echo "::set-output name=action::${action}"
+
   lint-yaml:
     uses: ./.github/workflows/lint-yaml.yml
+    needs: [diff]
+    if: ${{ needs.diff.outputs.yaml }}
 
   lint-yaml-with-inputs:
     uses: ./.github/workflows/lint-yaml.yml
+    needs: [diff]
+    if: ${{ needs.diff.outputs.yaml }}
     with:
       yamllint-config: ".yamllint.yml"
       timeout-minutes: 3
 
   lint-markdown:
     uses: ./.github/workflows/lint-markdown.yml
+    needs: [diff]
+    if: ${{ needs.diff.outputs.markdown }}
 
   lint-markdown-with-inputs:
     uses: ./.github/workflows/lint-markdown.yml
+    needs: [diff]
+    if: ${{ needs.diff.outputs.markdown }}
     with:
       markdownlint-config: ".markdownlint.yml"
       timeout-minutes: 3
 
   lint-shell:
     uses: ./.github/workflows/lint-shell.yml
+    needs: [diff]
+    if: ${{ needs.diff.outputs.shell }}
 
   lint-shell-with-inputs:
     uses: ./.github/workflows/lint-shell.yml
+    needs: [diff]
+    if: ${{ needs.diff.outputs.shell }}
     with:
       timeout-minutes: 3
 
   lint-action:
     uses: ./.github/workflows/lint-action.yml
+    needs: [diff]
+    if: ${{ needs.diff.outputs.action }}
     with:
       actionlint-ignore-options: >
         "permissions" section should not be empty.
 
   lint-action-with-inputs:
     uses: ./.github/workflows/lint-action.yml
+    needs: [diff]
+    if: ${{ needs.diff.outputs.action }}
     with:
       actionlint-ignore-options: '"permissions" section should not be empty.'
       timeout-minutes: 3
