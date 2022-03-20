@@ -30,7 +30,7 @@ jobs:
       shell: ${{ steps.git-diff.outputs.shell }}
       action: ${{ steps.git-diff.outputs.action }}
     steps:
-      - name: Checkout current branch
+      - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 100
