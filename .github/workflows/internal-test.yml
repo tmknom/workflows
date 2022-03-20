@@ -20,21 +20,29 @@ jobs:
   lint-yaml:
     uses: ./.github/workflows/lint-yaml.yml
 
-  lint-yaml-with-config:
+  lint-yaml-with-inputs:
     uses: ./.github/workflows/lint-yaml.yml
     with:
       yamllint-config: ".yamllint.yml"
+      timeout-minutes: 3
 
   lint-markdown:
     uses: ./.github/workflows/lint-markdown.yml
 
-  lint-markdown-with-config:
+  lint-markdown-with-inputs:
     uses: ./.github/workflows/lint-markdown.yml
     with:
       markdownlint-config: ".markdownlint.yml"
+      timeout-minutes: 3
 
   lint-action:
     uses: ./.github/workflows/lint-action.yml
     with:
       actionlint-ignore-options: >
         "permissions" section should not be empty.
+
+  lint-action-with-inputs:
+    uses: ./.github/workflows/lint-action.yml
+    with:
+      actionlint-ignore-options: '"permissions" section should not be empty.'
+      timeout-minutes: 3

@@ -7,12 +7,17 @@ on:
         required: false
         type: string
         description: "Path to a configuration file."
+      timeout-minutes:
+        default: 5
+        required: false
+        type: number
+        description: "The maximum number of minutes to let a job run before GitHub automatically cancels it."
 
 jobs:
   markdownlint:
     name: Lint by markdownlint
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: ${{ inputs.timeout-minutes }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -34,7 +39,7 @@ jobs:
   prettier:
     name: Format by prettier
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: ${{ inputs.timeout-minutes }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3

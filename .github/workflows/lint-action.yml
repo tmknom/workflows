@@ -9,12 +9,17 @@ on:
         description: >
           Regular expression matching to error messages you want to ignore for actionlint.
           Specify on multiple lines, you can set repeatable ignore flags.
+      timeout-minutes:
+        default: 5
+        required: false
+        type: number
+        description: "The maximum number of minutes to let a job run before GitHub automatically cancels it."
 
 jobs:
   actionlint:
     name: Lint by actionlint
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: ${{ inputs.timeout-minutes }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
