@@ -39,7 +39,9 @@ jobs:
       - name: Run shellcheck
         run: |
           IFS=$'\n' read -ra files <<< "$(find . -name "*.sh")"
-          shellcheck "${files[@]}"
+          if [[ "${files[0]}" != "" ]]; then
+            shellcheck "${files[@]}"
+          fi
 
   shfmt:
     name: Lint by shfmt
