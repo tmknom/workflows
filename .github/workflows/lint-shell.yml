@@ -38,7 +38,8 @@ jobs:
           shellcheck --version
       - name: Run shellcheck
         run: |
-          shellcheck ./*.sh
+          IFS=$'\n' read -ra files <<< "$(find . -name "*.sh")"
+          shellcheck "${files[@]}"
 
   shfmt:
     name: Lint by shfmt
