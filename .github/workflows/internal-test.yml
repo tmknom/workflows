@@ -35,6 +35,14 @@ jobs:
       markdownlint-config: ".markdownlint.yml"
       timeout-minutes: 3
 
+  lint-shell:
+    uses: ./.github/workflows/lint-shell.yml
+
+  lint-shell-with-inputs:
+    uses: ./.github/workflows/lint-shell.yml
+    with:
+      timeout-minutes: 3
+
   lint-action:
     uses: ./.github/workflows/lint-action.yml
     with:
