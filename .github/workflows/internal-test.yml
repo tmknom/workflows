@@ -9,6 +9,7 @@ on:
       - "**.yml"
       - "**.yaml"
       - "**.md"
+      - "**.sh"
 
 permissions: {}
 
