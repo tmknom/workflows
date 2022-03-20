@@ -61,4 +61,4 @@ jobs:
         run: |
           docker run --rm -v "$(pwd)":/work -w /work \
           --security-opt=no-new-privileges --cap-drop all --network none \
-          mvdan/shfmt -i 2 -ci -bn -d ./*.sh
+          mvdan/shfmt -i 2 -ci -bn -d .
