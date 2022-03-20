@@ -10,6 +10,7 @@ Available workflows:
 
 - Lint and check format for YAML
 - Lint and check format for Markdown
+- Lint and check format for Shell
 - Lint for GitHub Actions workflows
 
 See details: [GitHub documentation](https://docs.github.com/en/actions/using-workflows/reusing-workflows).
@@ -30,6 +31,14 @@ jobs:
 jobs:
   lint-markdown:
     uses: tmknom/workflows/.github/workflows/lint-markdown.yml@v1
+```
+
+### Lint Shell
+
+```yaml
+jobs:
+  lint-shell:
+    uses: tmknom/workflows/.github/workflows/lint-shell.yml@v1
 ```
 
 ### Lint Action

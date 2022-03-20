@@ -1,0 +1,63 @@
+name: Lint Shell
+on:
+  workflow_call:
+    inputs:
+      timeout-minutes:
+        default: 5
+        required: false
+        type: number
+        description: "The maximum number of minutes to let a job run before GitHub automatically cancels it."
+
+jobs:
+  validate:
+    name: Validate existing shell
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    outputs:
+      existence: ${{ steps.check.outputs.existence }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Check existence
+        id: check
+        run: echo "::set-output name=existence::$(find . -name "*.sh")"
+
+  shellcheck:
+    # use pre-installed shellcheck
+    # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
+    name: Lint by shellcheck
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    needs: [validate]
+    if: ${{ needs.validate.outputs.existence }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.5
+      - name: Display shellcheck
+        run: |
+          shellcheck --version
+      - name: Run shellcheck
+        run: |
+          shellcheck ./*.sh
+
+  shfmt:
+    name: Lint by shfmt
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    needs: [validate]
+    if: ${{ needs.validate.outputs.existence }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Pull shfmt
+        run: |
+          docker pull mvdan/shfmt
+      - name: Display shfmt
+        run: |
+          docker run --rm --security-opt=no-new-privileges --cap-drop all --network none \
+          mvdan/shfmt --version
+      - name: Run shfmt
+        run: |
+          docker run --rm -v "$(pwd)":/work -w /work \
+          --security-opt=no-new-privileges --cap-drop all --network none \
+          mvdan/shfmt -i 2 -ci -bn -d ./*.sh
