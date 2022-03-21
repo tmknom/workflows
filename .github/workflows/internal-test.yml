@@ -6,6 +6,7 @@ on:
       - ".github/workflows/internal-test.yml"
   pull_request:
     paths:
+      - "!.github/workflows/internal-test.yml"
       - "**.yml"
       - "**.yaml"
       - "**.md"
