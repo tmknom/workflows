@@ -32,7 +32,7 @@ jobs:
     if: ${{ needs.validate.outputs.existence }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.5
+        uses: actions/checkout@v3
       - name: Display shellcheck
         run: |
           shellcheck --version
