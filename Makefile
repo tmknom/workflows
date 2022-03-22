@@ -23,9 +23,11 @@ SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
 #
-# Variables for the directory path
+# Variables for the file and directory path
 #
 ROOT_DIR ?= $(shell $(GIT) rev-parse --show-toplevel)
+MARKDOWN_FILES ?= $(shell find . -name '*.md')
+YAML_FILES ?= $(shell find . -name '*.y*ml')
 
 #
 # Variables to be used by Git and GitHub CLI
@@ -69,13 +71,13 @@ lint: lint-markdown lint-yaml lint-action ## lint all
 
 .PHONY: lint-markdown
 lint-markdown: ## lint markdown by markdownlint and prettier
-	$(SECURE_DOCKER_RUN) $(MARKDOWNLINT) --dot --config .markdownlint.yml **/*.md
-	$(SECURE_DOCKER_RUN) $(PRETTIER) --check --parser=markdown **/*.md
+	$(SECURE_DOCKER_RUN) $(MARKDOWNLINT) --dot --config .markdownlint.yml $(MARKDOWN_FILES)
+	$(SECURE_DOCKER_RUN) $(PRETTIER) --check --parser=markdown $(MARKDOWN_FILES)
 
 .PHONY: lint-yaml
 lint-yaml: ## lint yaml by yamllint and prettier
 	$(SECURE_DOCKER_RUN) $(YAMLLINT) --strict --config-file .yamllint.yml .
-	$(SECURE_DOCKER_RUN) $(PRETTIER) --check --parser=yaml **/*.y*ml
+	$(SECURE_DOCKER_RUN) $(PRETTIER) --check --parser=yaml $(YAML_FILES)
 
 .PHONY: lint-action
 lint-action: ## lint action by actionlint
@@ -89,11 +91,11 @@ format: format-markdown format-yaml ## format all
 
 .PHONY: format-markdown
 format-markdown: ## format markdown by prettier
-	$(SECURE_DOCKER_RUN) $(PRETTIER) --write --parser=markdown **/*.md
+	$(SECURE_DOCKER_RUN) $(PRETTIER) --write --parser=markdown $(MARKDOWN_FILES)
 
 .PHONY: format-yaml
 format-yaml: ## format yaml by prettier
-	$(SECURE_DOCKER_RUN) $(PRETTIER) --write --parser=yaml **/*.y*ml
+	$(SECURE_DOCKER_RUN) $(PRETTIER) --write --parser=yaml $(YAML_FILES)
 
 #
 # Release management
