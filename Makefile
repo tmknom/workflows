@@ -34,6 +34,7 @@ YAML_FILES ?= $(shell find . -name '*.y*ml')
 #
 GIT ?= $(shell \command -v git 2>/dev/null)
 GH ?= $(shell \command -v gh 2>/dev/null)
+GIT_EXCLUDE_FILES ?= ':!*.md' ':!Makefile' ':!.github/fixtures/*' ':!.github/workflows/internal-*'
 
 #
 # Variables to be used by Docker
@@ -62,6 +63,12 @@ PRETTIER ?= $(REGISTRY)/prettier:latest
 MARKDOWNLINT ?= $(REGISTRY)/markdownlint:latest
 YAMLLINT ?= $(REGISTRY)/yamllint:latest
 ACTIONLINT ?= rhysd/actionlint:latest
+
+#
+# Variables for the version
+#
+VERSION ?= $(shell \cat VERSION)
+SEMVER ?= "v$(VERSION)"
 
 #
 # Lint
@@ -125,6 +132,17 @@ create-pr:
 	version="v$$(cat VERSION)" && \
 	$(GIT) push origin $$($(GIT) rev-parse --abbrev-ref HEAD) && \
 	$(GH) pr create --title "Bump up to $${version}" --body "" --web
+
+#
+# Git shortcut
+#
+.PHONY: git-diff
+git-diff: ## git diff only features
+	@$(GIT) diff $(SEMVER)... -- $(GIT_EXCLUDE_FILES)
+
+.PHONY: git-log
+git-log: ## git log only features
+	@$(GIT) log $(SEMVER)... -- $(GIT_EXCLUDE_FILES)
 
 #
 # Help
