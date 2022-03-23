@@ -49,6 +49,10 @@ jobs:
     uses: tmknom/workflows/.github/workflows/lint-action.yml@v1
 ```
 
+<!-- markdownlint-disable MD033 -->
+<details>
+<summary>Click to see details</summary>
+
 ## Developer Guide
 
 ### Requirements
@@ -99,6 +103,9 @@ Use the [Semantic Versioning](https://semver.org/).
 
 Files with `internal-` prefix such as [internal-test.yml](.github/workflows/internal-test.yml)
 are used only this repository. These aren't reusable workflows for using by the others.
+
+</details>
+<!-- markdownlint-enable MD033 -->
 
 ## Changelog
 
