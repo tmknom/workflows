@@ -25,6 +25,8 @@ jobs:
     uses: tmknom/workflows/.github/workflows/lint-yaml.yml@v1
 ```
 
+For more information, see [lint-yaml.yml](/.github/workflows/lint-yaml.yml).
+
 ### Lint Markdown
 
 ```yaml
@@ -32,6 +34,8 @@ jobs:
   lint-markdown:
     uses: tmknom/workflows/.github/workflows/lint-markdown.yml@v1
 ```
+
+For more information, see [lint-markdown.yml](/.github/workflows/lint-markdown.yml).
 
 ### Lint Shell
 
@@ -41,6 +45,8 @@ jobs:
     uses: tmknom/workflows/.github/workflows/lint-shell.yml@v1
 ```
 
+For more information, see [lint-shell.yml](/.github/workflows/lint-shell.yml).
+
 ### Lint Action
 
 ```yaml
@@ -48,6 +54,8 @@ jobs:
   lint-action:
     uses: tmknom/workflows/.github/workflows/lint-action.yml@v1
 ```
+
+For more information, see [lint-action.yml](/.github/workflows/lint-action.yml).
 
 <!-- markdownlint-disable MD033 -->
 <details>
