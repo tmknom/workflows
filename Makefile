@@ -119,7 +119,7 @@ bump: input-version commit create-pr ## bump version
 input-version:
 	@echo "Current version: $(VERSION)" && \
 	read -rp "Input next version: " version && \
-	echo "$(VERSION)" > VERSION
+	echo "$${version}" > VERSION
 
 commit:
 	$(GIT) switch -c "bump-$(SEMVER)" && \
