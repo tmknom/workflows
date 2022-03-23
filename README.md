@@ -13,7 +13,7 @@ Available workflows:
 - Lint and check format for Shell
 - Lint for GitHub Actions workflows
 
-See details: [GitHub documentation](https://docs.github.com/en/actions/using-workflows/reusing-workflows).
+For more information, see [GitHub documentation](https://docs.github.com/en/actions/using-workflows/reusing-workflows).
 
 ## Usage
 
