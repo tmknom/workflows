@@ -57,7 +57,7 @@ jobs:
 
 For more information, see [lint-action.yml](/.github/workflows/lint-action.yml).
 
-<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable no-inline-html -->
 <details>
 <summary>Click to see details</summary>
 
@@ -113,7 +113,7 @@ Files with `internal-` prefix such as [internal-test.yml](.github/workflows/inte
 are used only this repository. These aren't reusable workflows for using by the others.
 
 </details>
-<!-- markdownlint-enable MD033 -->
+<!-- markdownlint-enable no-inline-html -->
 
 ## Changelog
 
