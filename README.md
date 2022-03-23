@@ -57,11 +57,11 @@ jobs:
 
 For more information, see [lint-action.yml](/.github/workflows/lint-action.yml).
 
+## Developer Guide
+
 <!-- markdownlint-disable no-inline-html -->
 <details>
 <summary>Click to see details</summary>
-
-## Developer Guide
 
 ### Requirements
 
