@@ -73,6 +73,12 @@ SEMVER ?= "v$(VERSION)"
 MAJOR_VERSION ?= $(shell version=$(SEMVER) && echo "$${version%%.*}")
 
 #
+# All
+#
+.PHONY: all
+all: install lint ## all
+
+#
 # Install dependencies
 #
 .PHONY: install
