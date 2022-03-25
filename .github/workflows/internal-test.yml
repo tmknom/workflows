@@ -107,3 +107,11 @@ jobs:
     with:
       actionlint-ignore-options: '"permissions" section should not be empty.'
       timeout-minutes: 3
+
+  scan-secret:
+    uses: ./.github/workflows/scan-secret.yml
+
+  scan-secret-with-inputs:
+    uses: ./.github/workflows/scan-secret.yml
+    with:
+      timeout-minutes: 3
