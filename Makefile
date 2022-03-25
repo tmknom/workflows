@@ -34,7 +34,7 @@ YAML_FILES ?= $(shell find . -name '*.y*ml')
 #
 GIT ?= $(shell \command -v git 2>/dev/null)
 GH ?= $(shell \command -v gh 2>/dev/null)
-GIT_EXCLUDE_FILES ?= ':!*.md' ':!Makefile' ':!VERSION' ':!.github/*' ':!.github/fixtures/*' ':!.github/workflows/internal-*'
+GIT_EXCLUDE_FILES ?= ':!*.md' ':!Makefile' ':!VERSION' ':!.github/fixtures/*' ':!.github/workflows/internal-*'
 
 #
 # Variables to be used by Docker
