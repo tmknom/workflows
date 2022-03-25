@@ -12,6 +12,7 @@ Available workflows:
 - Lint and check format for Markdown
 - Lint and check format for Shell
 - Lint for GitHub Actions workflows
+- Scan secret for all code
 
 For more information, see [GitHub documentation](https://docs.github.com/en/actions/using-workflows/reusing-workflows).
 
@@ -56,6 +57,16 @@ jobs:
 ```
 
 For more information, see [lint-action.yml](/.github/workflows/lint-action.yml).
+
+### Scan Secret
+
+```yaml
+jobs:
+  scan-secret:
+    uses: tmknom/workflows/.github/workflows/scan-secret.yml@v1
+```
+
+For more information, see [scan-secret.yml](/.github/workflows/scan-secret.yml).
 
 ## Developer Guide
 
