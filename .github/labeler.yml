@@ -3,9 +3,9 @@ workflows:
   - ".github/workflows/scan-*"
 
 github:
-  - ".github/**/*"
-  - "!.github/workflows/lint-*"
-  - "!.github/workflows/scan-*"
+  - ".github/*.yml"
+  - ".github/fixtures/*"
+  - ".github/workflows/internal-*"
 
 docs:
   - "**/*.md"
