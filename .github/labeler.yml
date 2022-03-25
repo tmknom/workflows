@@ -1,0 +1,18 @@
+workflows:
+  - ".github/workflows/*"
+  - "!.github/workflows/internal-*"
+
+github:
+  - ".github/**/*"
+  - "!.github/workflows/*"
+  - ".github/workflows/internal-*"
+
+docs:
+  - "**/*.md"
+
+chore:
+  - "Makefile"
+  - "VERSION"
+  - ".gitignore"
+  - ".markdownlint.yml"
+  - ".yamllint.yml"
