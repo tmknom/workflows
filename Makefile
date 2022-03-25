@@ -54,6 +54,7 @@ DOCKER_RUN_SECURE_OPTIONS += --cap-drop all
 DOCKER_RUN_SECURE_OPTIONS += --network none
 DOCKER_RUN ?= $(DOCKER) run $(DOCKER_RUN_OPTIONS)
 SECURE_DOCKER_RUN ?= $(DOCKER_RUN) $(DOCKER_RUN_SECURE_OPTIONS)
+DOCKER_PULL ?= $(DOCKER) pull
 
 #
 # Variables for the image name
@@ -70,6 +71,16 @@ ACTIONLINT ?= rhysd/actionlint:latest
 VERSION ?= $(shell \cat VERSION)
 SEMVER ?= "v$(VERSION)"
 MAJOR_VERSION ?= $(shell version=$(SEMVER) && echo "$${version%%.*}")
+
+#
+# Install dependencies
+#
+.PHONY: install
+install: ## install docker images
+	$(DOCKER_PULL) $(PRETTIER)
+	$(DOCKER_PULL) $(MARKDOWNLINT)
+	$(DOCKER_PULL) $(YAMLLINT)
+	$(DOCKER_PULL) $(ACTIONLINT)
 
 #
 # Lint
