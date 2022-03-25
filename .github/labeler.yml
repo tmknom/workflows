@@ -1,9 +1,11 @@
 workflows:
   - ".github/workflows/lint-*"
+  - ".github/workflows/scan-*"
 
 github:
   - ".github/**/*"
   - "!.github/workflows/lint-*"
+  - "!.github/workflows/scan-*"
 
 docs:
   - "**/*.md"
