@@ -34,7 +34,7 @@ YAML_FILES ?= $(shell find . -name '*.y*ml')
 #
 GIT ?= $(shell \command -v git 2>/dev/null)
 GH ?= $(shell \command -v gh 2>/dev/null)
-GIT_EXCLUDE_FILES ?= ':!*.md' ':!Makefile' ':!.github/fixtures/*' ':!.github/workflows/internal-*'
+GIT_EXCLUDE_FILES ?= ':!*.md' ':!Makefile' ':!VERSION' ':!.github/*' ':!.github/fixtures/*' ':!.github/workflows/internal-*'
 
 #
 # Variables to be used by Docker
@@ -133,12 +133,12 @@ create-pr:
 #
 # Git shortcut
 #
-.PHONY: git-diff
-git-diff: ## git diff only features
+.PHONY: diff
+diff: ## git diff only features
 	@$(GIT) diff $(SEMVER)... -- $(GIT_EXCLUDE_FILES)
 
-.PHONY: git-log
-git-log: ## git log only features
+.PHONY: log
+log: ## git log only features
 	@$(GIT) log $(SEMVER)... -- $(GIT_EXCLUDE_FILES)
 
 #
