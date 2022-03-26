@@ -77,13 +77,24 @@ For more information, see [scan-secret.yml](/.github/workflows/scan-secret.yml).
 ### Requirements
 
 - [GNU Make](https://www.gnu.org/software/make/)
+- [Docker](https://docs.docker.com/get-docker/)
 - [GitHub CLI](https://cli.github.com/)
 
 ### CI
 
-- Testing workflows: [internal-test.yml](.github/workflows/internal-test.yml)
+When create a pull request, the following workflows are executed automatically at GitHub Actions.
 
-### Release
+- Test workflows, see [internal-test.yml](.github/workflows/internal-test.yml).
+- Lint YAML, Markdown, Shell, and GitHub Action, see [internal-lint.yml](.github/workflows/internal-lint.yml).
+
+**NOTE:** Files with `internal-` prefix are not reusable workflows, and used only this repository.
+
+### Dependency management
+
+Use Dependabot version updates.
+For more information, see [dependabot.yml](/.github/dependabot.yml).
+
+### Release management
 
 #### 1. Bump up to a new version
 
@@ -96,9 +107,8 @@ make bump
 This command will execute the following steps:
 
 1. Update [VERSION](/VERSION)
-2. Commit and push
-3. Create a pull request
-4. Open the web browser automatically for reviewing pull request
+2. Commit, push, and create a pull request
+3. Open the web browser automatically for reviewing pull request
 
 Then review and merge, so the release is ready to go.
 
@@ -112,17 +122,6 @@ make release
 
 Finally, we can use the new version! :tada:
 
-### Note
-
-#### Versioning policy
-
-Use the [Semantic Versioning](https://semver.org/).
-
-#### Naming conventions
-
-Files with `internal-` prefix such as [internal-test.yml](.github/workflows/internal-test.yml)
-are used only this repository. These aren't reusable workflows for using by the others.
-
 </details>
 <!-- markdownlint-enable no-inline-html -->
 
@@ -132,4 +131,4 @@ See [CHANGELOG.md](/CHANGELOG.md).
 
 ## License
 
-Apache 2 Licensed. See LICENSE for full details.
+Apache 2 Licensed. See [LICENSE](/LICENSE) for full details.
