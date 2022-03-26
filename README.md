@@ -80,6 +80,12 @@ For more information, see [scan-secret.yml](/.github/workflows/scan-secret.yml).
 - [Docker](https://docs.docker.com/get-docker/)
 - [GitHub CLI](https://cli.github.com/)
 
+### Development
+
+1. Creating a new Reusable Workflow: `.github/workflows/<workflow_name>.yml`
+2. Add test for the new Reusable Workflow: `.github/workflows/internal-test.yml`
+3. Update description and append usage: `README.md`
+
 ### CI
 
 When create a pull request, the following workflows are executed automatically at GitHub Actions.
