@@ -2,6 +2,12 @@
 
 <!-- markdownlint-disable no-duplicate-heading -->
 
+## [1.2.0](https://github.com/tmknom/workflows/compare/v1.1.0...v1.2.0)
+
+### NEW FEATURES
+
+- Add support for [Scan Secret](/.github/workflows/scan-secret.yml)
+
 ## [1.1.0](https://github.com/tmknom/workflows/compare/v1.0.0...v1.1.0)
 
 ### NEW FEATURES
