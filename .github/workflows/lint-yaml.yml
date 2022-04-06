@@ -2,6 +2,10 @@ name: Lint YAML
 on:
   workflow_call:
     inputs:
+      pr-number:
+        required: false
+        type: number
+        description: "The pull request number"
       yamllint-config:
         default: ""
         required: false
@@ -26,15 +30,32 @@ jobs:
       - name: Display yamllint
         run: yamllint --version
       - name: Run yamllint
+        id: run
         env:
           CONFIG: ${{ inputs.yamllint-config }}
         run: |
-          declare -a args=("--strict" "--format" "github")
+          declare -a args=("--strict" "--format" "standard")
           if [[ "${CONFIG}" != "" ]]; then
             args+=("--config-file")
             args+=("${CONFIG}")
           fi
-          yamllint "${args[@]}" .
+          MESSAGE=$(yamllint "${args[@]}" .) || EXIT_CODE="$?" && \
+          MESSAGE="${MESSAGE//'%'/'%25'}" && \
+          MESSAGE="${MESSAGE//$'\n'/'%0A'}" && \
+          MESSAGE="${MESSAGE//$'\r'/'%0D'}" && \
+          echo "::set-output name=message::${MESSAGE}" && \
+          exit "${EXIT_CODE}"
+      - name: Comment PR
+        if: ${{ always() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ inputs.pr-number }}
+          MESSAGE: ${{ steps.run.outputs.message }}
+        run: |
+          set -x
+          if [[ "${PR_NUMBER}" != "0" && "${MESSAGE}" != "" ]]; then
+            gh pr comment "${PR_NUMBER}" --body "${MESSAGE}"
+          fi
 
   prettier:
     name: Format by prettier
