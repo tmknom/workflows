@@ -33,7 +33,7 @@ jobs:
       action: ${{ steps.git-diff.outputs.action }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 100
       - name: Git diff
