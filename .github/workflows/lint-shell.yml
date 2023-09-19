@@ -17,7 +17,7 @@ jobs:
       existence: ${{ steps.check.outputs.existence }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Check existence
         id: check
         run: echo "::set-output name=existence::$(find . -name "*.sh")"
@@ -32,7 +32,7 @@ jobs:
     if: ${{ needs.validate.outputs.existence }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Display shellcheck
         run: |
           shellcheck --version
@@ -51,7 +51,7 @@ jobs:
     if: ${{ needs.validate.outputs.existence }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Pull shfmt
         run: |
           docker pull mvdan/shfmt
